@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             button1 = new Button();
-            buttonPushImg = new Button();
             textBoxTEXT = new TextBox();
             textBoxDB = new TextBox();
             textBoxNUMB = new TextBox();
@@ -42,6 +41,8 @@
             label4 = new Label();
             textBoxNUMB2 = new TextBox();
             textBoxTEXT2 = new TextBox();
+            label5 = new Label();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -49,21 +50,11 @@
             // 
             button1.Location = new Point(23, 362);
             button1.Name = "button1";
-            button1.Size = new Size(353, 76);
+            button1.Size = new Size(765, 76);
             button1.TabIndex = 0;
             button1.Text = "Присвоїти значення";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // buttonPushImg
-            // 
-            buttonPushImg.Location = new Point(382, 362);
-            buttonPushImg.Name = "buttonPushImg";
-            buttonPushImg.Size = new Size(406, 76);
-            buttonPushImg.TabIndex = 1;
-            buttonPushImg.Text = "PushImg";
-            buttonPushImg.UseVisualStyleBackColor = true;
-            buttonPushImg.Click += buttonPushImg_Click;
             // 
             // textBoxTEXT
             // 
@@ -73,11 +64,10 @@
             textBoxTEXT.ScrollBars = ScrollBars.Vertical;
             textBoxTEXT.Size = new Size(168, 234);
             textBoxTEXT.TabIndex = 2;
-            textBoxTEXT.Leave += textBoxTEXT_Leave;
             // 
             // textBoxDB
             // 
-            textBoxDB.Location = new Point(23, 30);
+            textBoxDB.Location = new Point(23, 89);
             textBoxDB.Name = "textBoxDB";
             textBoxDB.Size = new Size(125, 27);
             textBoxDB.TabIndex = 3;
@@ -93,7 +83,7 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(23, 9);
+            label1.Location = new Point(23, 66);
             label1.Name = "label1";
             label1.Size = new Size(108, 20);
             label1.TabIndex = 5;
@@ -103,7 +93,7 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = SystemColors.ButtonHighlight;
-            label2.Location = new Point(167, 9);
+            label2.Location = new Point(167, 7);
             label2.Name = "label2";
             label2.Size = new Size(79, 20);
             label2.TabIndex = 6;
@@ -171,12 +161,31 @@
             textBoxTEXT2.Size = new Size(179, 234);
             textBoxTEXT2.TabIndex = 13;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(23, 7);
+            label5.Name = "label5";
+            label5.Size = new Size(142, 20);
+            label5.TabIndex = 14;
+            label5.Text = "Назва Бази данних";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(23, 30);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 15;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBox1);
+            Controls.Add(label5);
             Controls.Add(textBoxTEXT2);
             Controls.Add(textBoxNUMB2);
             Controls.Add(label4);
@@ -189,7 +198,6 @@
             Controls.Add(textBoxNUMB);
             Controls.Add(textBoxDB);
             Controls.Add(textBoxTEXT);
-            Controls.Add(buttonPushImg);
             Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
@@ -201,7 +209,6 @@
         #endregion
 
         private Button button1;
-        private Button buttonPushImg;
         private TextBox textBoxTEXT;
         private TextBox textBoxDB;
         private TextBox textBoxNUMB;
@@ -214,5 +221,7 @@
         private Label label4;
         private TextBox textBoxNUMB2;
         private TextBox textBoxTEXT2;
+        private Label label5;
+        private TextBox textBox1;
     }
 }
