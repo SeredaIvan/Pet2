@@ -43,6 +43,9 @@
             textBoxTEXT2 = new TextBox();
             label5 = new Label();
             textBox1 = new TextBox();
+            button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -101,9 +104,9 @@
             // 
             // buttonScanImg
             // 
-            buttonScanImg.Location = new Point(382, 30);
+            buttonScanImg.Location = new Point(380, 32);
             buttonScanImg.Name = "buttonScanImg";
-            buttonScanImg.Size = new Size(406, 29);
+            buttonScanImg.Size = new Size(324, 29);
             buttonScanImg.TabIndex = 7;
             buttonScanImg.Text = "ScanImg";
             buttonScanImg.UseVisualStyleBackColor = true;
@@ -111,18 +114,18 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(382, 63);
+            pictureBox1.Location = new Point(382, 66);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(406, 293);
+            pictureBox1.Size = new Size(406, 290);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
             // textBoxID
             // 
-            textBoxID.Location = new Point(298, 30);
+            textBoxID.Location = new Point(298, 32);
             textBoxID.Name = "textBoxID";
-            textBoxID.Size = new Size(78, 27);
+            textBoxID.Size = new Size(32, 27);
             textBoxID.TabIndex = 9;
             // 
             // label3
@@ -173,10 +176,40 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(23, 30);
+            textBox1.Location = new Point(23, 32);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 15;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(298, 87);
+            button2.Name = "button2";
+            button2.Size = new Size(78, 29);
+            button2.TabIndex = 16;
+            button2.Text = "Clear";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(710, 32);
+            button3.Name = "button3";
+            button3.Size = new Size(78, 29);
+            button3.TabIndex = 17;
+            button3.Text = "ClearImg";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(336, 32);
+            button4.Name = "button4";
+            button4.Size = new Size(40, 29);
+            button4.TabIndex = 18;
+            button4.Text = "++";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // Form1
             // 
@@ -184,6 +217,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            Controls.Add(button4);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(textBox1);
             Controls.Add(label5);
             Controls.Add(textBoxTEXT2);
@@ -223,5 +259,8 @@
         private TextBox textBoxTEXT2;
         private Label label5;
         private TextBox textBox1;
+        private Button button2;
+        private Button button3;
+        private Button button4;
     }
 }

@@ -21,9 +21,14 @@ namespace TextPusher
         private void button1_Click(object sender, EventArgs e)
         {
             var uploader = new Uploader(conString);
-            uploader.Upload(textBoxTEXT.Text, textBoxDB.Text, textBoxNUMB.Text, textBoxNUMB2.Text, textBoxTEXT2.Text, textBoxID.Text, pictureBox1,textBox1.Text);
+            uploader.Upload(textBoxTEXT.Text, textBoxDB.Text, textBoxNUMB.Text, textBoxNUMB2.Text, textBoxTEXT2.Text, textBoxID.Text, pictureBox1, textBox1.Text);
             textBoxTEXT.Text = "";
             textBoxTEXT2.Text = "";
+            string tmp = textBoxID.Text;
+            int tnp = Convert.ToInt32(tmp);
+            tnp++;
+            textBoxID.Text = tnp.ToString();
+            pictureBox1.Image = null;
         }
 
         private void buttonScanImg_Click(object sender, EventArgs e)
@@ -40,7 +45,30 @@ namespace TextPusher
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBoxDB.Text = "";
+            textBoxID.Text = "";
+            textBoxNUMB.Text = "";
+            textBoxNUMB2.Text = "";
+            textBoxTEXT.Text = "";
+            textBoxTEXT2.Text = "";
+            pictureBox1.Image = null;
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string tmp = textBoxID.Text;
+            int tnp = Convert.ToInt32(tmp);
+            tnp++;
+            textBoxID.Text = tnp.ToString();
+        }
     }
 
 
@@ -51,18 +79,21 @@ namespace TextPusher
         {
         }
 
-        public void Upload(string data, string tableName, string columnName, string columnName2, string data2, string ID, PictureBox pictureBox1,string database)
+        public void Upload(string data, string tableName, string columnName, string columnName2, string data2, string ID, PictureBox pictureBox1, string database)
         {
-            if (string.IsNullOrEmpty(database)) {
+            if (string.IsNullOrEmpty(database))
+            {
                 connectionString = $"server=localhost;port=3306;username=root;password=root;database={database}";
             }
-           
+
             using (var connection = GetConnection())
             using (var command = connection.CreateCommand())
             {
+                string forImage = "img";
+
                 if (((columnName2 != "" & data2 != "" || columnName2 != null & data2 != null) & ID != "" || ID != null) & pictureBox1.Image != null)//коли в нас є всі дані
                 {
-                    command.CommandText = $"INSERT INTO {tableName} (id, {columnName}, {columnName2}, img) VALUES (@ID, @DataText, @DataText2, @Image)";
+                    command.CommandText = $"INSERT INTO {tableName} (id, {columnName}, {columnName2}, {forImage}) VALUES (@ID, @DataText, @DataText2, @Image)";
                     command.Parameters.AddWithValue("@ID", ID);
                     command.Parameters.Add("@DataText", MySqlDbType.VarChar).Value = data;
                     command.Parameters.Add("@DataText2", MySqlDbType.VarChar).Value = data2; ;
@@ -124,9 +155,9 @@ namespace TextPusher
                 else if ((((columnName != "" & data == "" || columnName != null & data == null) & columnName2 == "" & data2 == "" || columnName2 == null & data2 == null) & ID != "" || ID != null) & pictureBox1.Image != null)
                 {
 
-                    command.CommandText = $"INSERT INTO {tableName} ({columnName}, img) VALUES (@ID,  @Image)";
+                    command.CommandText = $"INSERT INTO {tableName} ({columnName}, {forImage}) VALUES (@ID,  @Image)";
                     command.Parameters.AddWithValue("@ID", ID);
-                    
+
 
                     var image = new System.Drawing.Bitmap(pictureBox1.Image);
                     using (var memoryStream = new MemoryStream())
@@ -149,7 +180,7 @@ namespace TextPusher
                 {
 
                     command.CommandText = $"INSERT INTO {tableName} {columnName} VALUES (@Image)";
-                   
+
 
                     var image = new System.Drawing.Bitmap(pictureBox1.Image);
                     using (var memoryStream = new MemoryStream())
@@ -166,6 +197,7 @@ namespace TextPusher
 
                     connection.Open();
                     command.ExecuteNonQuery();
+
                     MessageBox.Show("Додано до бази даних");
                 }
             }

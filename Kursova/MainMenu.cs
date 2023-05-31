@@ -41,7 +41,9 @@ namespace Kursova
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            //Основний контент
+            Info info = new Info();
+            this.Hide();
+            info.Show();
 
         }
 
