@@ -44,13 +44,13 @@
             // 
             // flowLayoutPanelMain
             // 
+            flowLayoutPanelMain.BackColor = Color.IndianRed;
             flowLayoutPanelMain.Controls.Add(flowLayoutPanelAside);
             flowLayoutPanelMain.Controls.Add(panelInfo);
             flowLayoutPanelMain.Location = new Point(12, 12);
             flowLayoutPanelMain.Name = "flowLayoutPanelMain";
             flowLayoutPanelMain.Size = new Size(1878, 1009);
             flowLayoutPanelMain.TabIndex = 1;
-            flowLayoutPanelMain.Paint += flowLayoutPanelMain_Paint;
             // 
             // flowLayoutPanelAside
             // 
@@ -62,6 +62,7 @@
             // 
             // panelInfo
             // 
+            panelInfo.BackColor = SystemColors.Highlight;
             panelInfo.Location = new Point(309, 3);
             panelInfo.Name = "panelInfo";
             panelInfo.Size = new Size(1556, 1006);

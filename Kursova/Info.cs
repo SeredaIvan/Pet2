@@ -8,14 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToolTip = System.Windows.Forms.ToolTip;
+
 
 namespace Kursova
 {
     public partial class Info : Form
     {
+        private MySqlCommand command;
+        int[] numbers;
         public Info()
         {
             InitializeComponent();
+
         }
         string[] lines;
         private void CreateTextBoxes()
@@ -41,41 +46,113 @@ namespace Kursova
         }
         private void Label_Click(object sender, EventArgs e)
         {
-
+           
             Label clickedLabel = (Label)sender;
 
             string labelText = clickedLabel.Text;
 
-            PrintInfo(labelText);
-        }
-
-        private void PrintInfo(string labelText)
-        {
-            DB db = new DB();
-            db.openConnection();
-
-            MySqlCommand command = new MySqlCommand("SELECT COUNT(*) FROM c_sharp_headers WHERE h1 = @labelText", db.getConnection());
-            command.Parameters.AddWithValue("@labelText", labelText);
-
-            int count = Convert.ToInt32(command.ExecuteScalar());
-
-            db.closeConnection();
-
-            if (count > 0)
+            CheckLabel(labelText,numbers);
+            if (numbers != null)
             {
+                    PageInInfoForm[] pagesInSection = new PageInInfoForm[numbers.Length];
+                    FilWithInformation(numbers, pagesInSection);
 
             }
-            else
-            {
+            else {
+                MessageBox.Show("Не вдається створити сторінку  Label_Click");
+                return; }
 
+            
+        }
+
+       
+
+        private void FilWithInformation(int[] numbers, PageInInfoForm[] pagesInSection)
+        {
+            for (int i = 0; i < pagesInSection.Length; i++)
+            {
+                DataCollectionFromDB infoPageInSection = new DataCollectionFromDB(command, numbers[i]);
+                pagesInSection[i] = new PageInInfoForm(infoPageInSection.GetH1(), infoPageInSection.GetP(), infoPageInSection.GetImgData());
+            }
+        }
+        private void CheckLabel(string labelText,int[] numbers)
+        {
+            string subdivisions="";
+            string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+
+                    // Запит до бази даних для перевірки значення label.Text
+                    command.CommandText = "SELECT subdivisions FROM c_sharp_headers WHERE h1 = @h1";
+                    command.Parameters.AddWithValue("@h1", labelText);
+
+                    object subdivisionsValue = command.ExecuteScalar();
+
+                    if (subdivisionsValue != null)
+                    {
+                         subdivisions = subdivisionsValue.ToString();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не знайдено відповідного запису для значення " + labelText);
+                    }
+                   
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+                }
+
+                if (subdivisions != "")
+                {
+                    string[] numberStrings = subdivisions.Split(','); // Розділення рядка по комах і отримання масиву рядків
+                    if (numbers == null)
+                    {
+                        numbers = new int[numberStrings.Length]; // Створення масиву int для збереження чисел
+                    }
+                    else
+                    {
+                        int[] resizedArray = new int[numberStrings.Length];
+
+                        Array.Copy(numbers, resizedArray, Math.Min(numbers.Length, numberStrings.Length));
+
+                        numbers = resizedArray;
+                    }
+
+                    for (int i = 0; i < numberStrings.Length; i++)
+                    {
+                        int number;
+                        if (int.TryParse(numberStrings[i], out number)) // Перетворення рядка в int
+                        {
+                            numbers[i] = number; // Збереження числа у масиві
+                        }
+                        else
+                        {
+                            // Обробка помилки, якщо рядок не може бути перетворений в int
+                            MessageBox.Show("Неправильний формат числа: " + numberStrings[i]);
+                            // Або можна використати виключення: throw new FormatException("Неправильний формат числа: " + numberStrings[i]);
+                        }
+                    }
+
+
+
+                    
+                }
+                else
+                {
+                    
+                    MessageBox.Show("Не вдається створити сторінку CheckLabel");
+                    return;
+                }
             }
         }
         private void Info_Load(object sender, EventArgs e)
         {
-
-            //string filePath = @"C:\a_ZDTU\OOP\Курсова\Kursova\media\aside.txt";
-            //string[] lines = File.ReadAllLines(filePath);
-            //int lineCount = lines.Length;
             CreateTextBoxes();
         }
 

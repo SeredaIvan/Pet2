@@ -100,16 +100,15 @@ namespace Kursova
             if (table.Rows.Count > 0)
             {
                 MessageBox.Show("Авторизація пройшла успішно");
+                this.Hide();
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.Show();
             }
             else
             {
                 MessageBox.Show("Не вдалося авторизуватись!");
+                return;
             }
-
-            this.Hide();
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
-
         }
 
         private void Authorization_FormClosing(object sender, FormClosingEventArgs e)
