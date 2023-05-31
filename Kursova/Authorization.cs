@@ -106,6 +106,29 @@ namespace Kursova
                 MessageBox.Show("Не вдалося авторизуватись!");
             }
 
+            this.Hide();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Show();
+
+        }
+
+        private void Authorization_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+
+            Register form2 = Application.OpenForms.OfType<Register>().FirstOrDefault();
+            if (form2 != null)
+            {
+                form2.Close();
+            }
+
+            MainMenu form3 = Application.OpenForms.OfType<MainMenu>().FirstOrDefault();
+            if (form3 != null)
+            {
+                form3.Close();
+            }
+
+            e.Cancel = false;
         }
     }
 }

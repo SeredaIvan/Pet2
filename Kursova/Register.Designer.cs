@@ -30,17 +30,17 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            buttonReg = new Button();
+            label2 = new Label();
+            label3 = new Label();
+            textBoxPassword = new TextBox();
+            buttonRegistration = new Button();
+            textBoxPasswordCheck = new TextBox();
             label1 = new Label();
             textBoxLogin = new TextBox();
             panel2 = new Panel();
             label_Auth = new Label();
             panel3 = new Panel();
             pictureBoxBackButton = new PictureBox();
-            label2 = new Label();
-            textBoxPassword = new TextBox();
-            label3 = new Label();
-            textBoxPasswordCheck = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -54,7 +54,7 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(textBoxPassword);
-            panel1.Controls.Add(buttonReg);
+            panel1.Controls.Add(buttonRegistration);
             panel1.Controls.Add(textBoxPasswordCheck);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBoxLogin);
@@ -65,18 +65,65 @@
             panel1.Size = new Size(420, 280);
             panel1.TabIndex = 0;
             // 
-            // buttonReg
+            // label2
             // 
-            buttonReg.Anchor = AnchorStyles.None;
-            buttonReg.Cursor = Cursors.Hand;
-            buttonReg.Location = new Point(93, 235);
-            buttonReg.Margin = new Padding(3, 30, 3, 30);
-            buttonReg.Name = "buttonReg";
-            buttonReg.Size = new Size(230, 31);
-            buttonReg.TabIndex = 5;
-            buttonReg.Text = "Зареєструватись";
-            buttonReg.UseVisualStyleBackColor = true;
-            buttonReg.Click += button2_Click;
+            label2.Anchor = AnchorStyles.None;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(93, 118);
+            label2.Margin = new Padding(95, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(62, 20);
+            label2.TabIndex = 6;
+            label2.Text = "Пароль";
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.None;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(93, 169);
+            label3.Margin = new Padding(95, 0, 5, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(62, 20);
+            label3.TabIndex = 8;
+            label3.Text = "Пароль";
+            // 
+            // textBoxPassword
+            // 
+            textBoxPassword.Anchor = AnchorStyles.None;
+            textBoxPassword.Location = new Point(93, 139);
+            textBoxPassword.Margin = new Padding(3, 30, 3, 3);
+            textBoxPassword.MaxLength = 10;
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.Size = new Size(230, 27);
+            textBoxPassword.TabIndex = 5;
+            // 
+            // buttonRegistration
+            // 
+            buttonRegistration.Anchor = AnchorStyles.None;
+            buttonRegistration.Cursor = Cursors.Hand;
+            buttonRegistration.Location = new Point(93, 235);
+            buttonRegistration.Margin = new Padding(3, 30, 3, 30);
+            buttonRegistration.Name = "buttonRegistration";
+            buttonRegistration.Size = new Size(230, 31);
+            buttonRegistration.TabIndex = 5;
+            buttonRegistration.Text = "Зареєструватись";
+            buttonRegistration.UseVisualStyleBackColor = true;
+            buttonRegistration.Click += buttonRegistration_Click;
+            // 
+            // textBoxPasswordCheck
+            // 
+            textBoxPasswordCheck.Anchor = AnchorStyles.None;
+            textBoxPasswordCheck.Location = new Point(93, 189);
+            textBoxPasswordCheck.Margin = new Padding(3, 30, 3, 3);
+            textBoxPasswordCheck.MaxLength = 10;
+            textBoxPasswordCheck.Name = "textBoxPasswordCheck";
+            textBoxPasswordCheck.Size = new Size(230, 27);
+            textBoxPasswordCheck.TabIndex = 7;
+            textBoxPasswordCheck.Leave += textBoxPasswordCheck_Leave;
             // 
             // label1
             // 
@@ -129,7 +176,7 @@
             panel3.Controls.Add(pictureBoxBackButton);
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(109, 50);
+            panel3.Size = new Size(50, 50);
             panel3.TabIndex = 1;
             // 
             // pictureBoxBackButton
@@ -144,52 +191,6 @@
             pictureBoxBackButton.TabStop = false;
             pictureBoxBackButton.Click += pictureBoxBackButton_Click;
             // 
-            // label2
-            // 
-            label2.Anchor = AnchorStyles.None;
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(93, 118);
-            label2.Margin = new Padding(95, 0, 5, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(62, 20);
-            label2.TabIndex = 6;
-            label2.Text = "Пароль";
-            // 
-            // textBoxPassword
-            // 
-            textBoxPassword.Anchor = AnchorStyles.None;
-            textBoxPassword.Location = new Point(93, 139);
-            textBoxPassword.Margin = new Padding(3, 30, 3, 3);
-            textBoxPassword.MaxLength = 10;
-            textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.Size = new Size(230, 27);
-            textBoxPassword.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.Anchor = AnchorStyles.None;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(93, 169);
-            label3.Margin = new Padding(95, 0, 5, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(62, 20);
-            label3.TabIndex = 8;
-            label3.Text = "Пароль";
-            // 
-            // textBoxPasswordCheck
-            // 
-            textBoxPasswordCheck.Anchor = AnchorStyles.None;
-            textBoxPasswordCheck.Location = new Point(93, 189);
-            textBoxPasswordCheck.Margin = new Padding(3, 30, 3, 3);
-            textBoxPasswordCheck.MaxLength = 10;
-            textBoxPasswordCheck.Name = "textBoxPasswordCheck";
-            textBoxPasswordCheck.Size = new Size(230, 27);
-            textBoxPasswordCheck.TabIndex = 7;
-            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -200,6 +201,7 @@
             Name = "Register";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Register";
+            FormClosing += Register_FormClosing;
             Load += Register_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -215,7 +217,7 @@
         private Panel panel1;
         private Panel panel2;
         private Label label_Auth;
-        private Button buttonReg;
+        private Button buttonRegistration;
         private Label label1;
         private TextBox textBoxLogin;
         private Panel panel3;

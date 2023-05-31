@@ -161,6 +161,7 @@
             Name = "Authorization";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authorization";
+            FormClosing += Authorization_FormClosing;
             Load += Authorization_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

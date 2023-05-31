@@ -23,18 +23,44 @@ namespace Kursova
         }
         private void SetInitialSize()
         {
-            // Отримати розмір робочого столу
+
             Rectangle workingArea = Screen.PrimaryScreen.WorkingArea;
 
-            // Встановити розмір форми
-            int width = workingArea.Width - 100;  // Зменшити ширину на 100 пікселів
-            int height = workingArea.Height - 100; // Зменшити висоту на 100 пікселів
+
+            int width = workingArea.Width - 100;
+            int height = workingArea.Height - 100;
             this.Size = new Size(width, height);
 
-            // Встановити позицію форми по центру робочого столу
+
             int left = workingArea.Left + (workingArea.Width - width) / 2;
             int top = workingArea.Top + (workingArea.Height - height) / 2;
             this.Location = new Point(left, top);
         }
+
+
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            //Основний контент
+
+        }
+
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Authorization form1 = Application.OpenForms.OfType<Authorization>().FirstOrDefault();
+            if (form1 != null)
+            {
+                form1.Close();
+            }
+
+            Register form2 = Application.OpenForms.OfType<Register>().FirstOrDefault();
+            if (form2 != null)
+            {
+                form2.Close();
+            }
+
+            e.Cancel = false;
+        }
+
     }
 }

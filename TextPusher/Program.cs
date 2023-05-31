@@ -1,4 +1,4 @@
-namespace Kursova
+namespace TextPusher
 {
     internal static class Program
     {
@@ -11,11 +11,7 @@ namespace Kursova
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //Authorization authorization = new Authorization();
-            //authorization.Show();
-            Info am= new Info();
-            Application.Run(am);
-            Application.Exit();
+            Application.Run(new Form1());
         }
     }
 }
