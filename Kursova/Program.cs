@@ -16,6 +16,7 @@ namespace Kursova
             Info am= new Info();
             Application.Run(am);
             Application.Exit();
+            //ProgTech
         }
     }
 }

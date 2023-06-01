@@ -1,39 +1,71 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Kursova
 {
     public class PageInInfoForm
     {
-        Label labelH1;
-        Label labelP;
-        PictureBox pictureBox;
+        public Label labelH1;
+        public Label labelP;
+        //public PictureBox pictureBox;
+
         public PageInInfoForm()
         {
-            labelH1 = null;
-            labelP = null;
-            pictureBox = null;
+
+            this.labelH1 = null;
+            this.labelP = null;
+            //pictureBox = null;
+
+
         }
-        public PageInInfoForm(string labelH1str,string labelstr, byte[]img)
+        public PageInInfoForm(string labelH1str, string labelPstr)//, PictureBox pictureBoxLite)
         {
-            Label labelH1 = new Label();
-            Label labelP = new Label();
-            PictureBox pictureBox = new PictureBox();
+            this.labelH1 = new Label();
+            this.labelP = new Label();
 
-            labelH1.Text = labelH1str;
-            labelP.Text = labelstr;
-            using (var stream = new System.IO.MemoryStream(img))
-            {
-                pictureBox.Image = System.Drawing.Image.FromStream(stream);
-            }
+            this.labelH1.Text = labelH1str;
+            this.labelP.Text = labelPstr;
 
-            labelH1.Font = new Font(labelH1.Font.FontFamily, 30, FontStyle.Bold);
-            labelP.Font = new Font(labelP.Font.FontFamily, 14);
+            //pictureBox = new PictureBox();
+            //pictureBox.Image = pictureBoxLite.Image;
 
         }
+        public PageInInfoForm(string labelPstr)//, PictureBox pictureBoxLite)
+        {
 
+            this.labelP = new Label();
+
+            this.labelH1.Text = null;
+            this.labelP.Text = labelPstr;
+            //pictureBox = new PictureBox();
+            //pictureBox.Image = pictureBoxLite.Image;
+            
+
+        }
+        //public PageInInfoForm(string labelH1str, string labelPstr)
+        //{
+
+        //    labelH1.Text = labelH1str;
+        //    labelP.Text = labelPstr;
+        //    //pictureBox = null;
+
+
+
+        //}
+        //public PageInInfoForm(string labelPstr)
+        //{
+
+        //    labelH1.Text = null;
+        //    labelP.Text = labelPstr;
+        //    //pictureBox = null;
+
+        //}
+        
+        
     }
 }
