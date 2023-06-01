@@ -1,66 +1,84 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class DataCollectionFromDB
+namespace Kursova
 {
-    public string H1 { get; set; }
-    public string P { get; set; }
-    public PictureBox pictureBox { get; set; }
-
-
-
-
-    public DataCollectionFromDB(MySqlCommand command, int subvision)
+    public class DataCollectionFromDB
     {
-        string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        private string H1 { get; set; }
+        private string P { get; set; }
+
+        
+        private Bitmap bitmapData {  get; set; }
+        public DataCollectionFromDB(MySqlCommand command, int number)
         {
-            command = connection.CreateCommand();
-            try
+            string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                connection.Open();
-
-                // Запит до бази даних для отримання даних
-                command.CommandText = "SELECT h1, p, img FROM c_sharp_info WHERE id=@ID";
-                command.Parameters.Add("@ID", MySqlDbType.VarChar).Value = subvision;
-
-                using (MySqlDataReader reader = command.ExecuteReader())
+                command = connection.CreateCommand();
+                try
                 {
-                    if (reader.Read())
-                    {
+                    connection.Open();
 
+                    // Запит до бази даних для отримання даних
+                    command.CommandText = "SELECT h1, p, img FROM c_sharp_info  WHERE id = @ID";
+                    command.Parameters.AddWithValue("@ID", number);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
                         string h1 = null;
-                        if (!reader.IsDBNull(reader.GetOrdinal("h1")))
-                            h1 = reader.GetString("h1");
+                        h1 = reader.GetString("h1");
 
                         string p = null;
-                        if (!reader.IsDBNull(reader.GetOrdinal("p")))
-                            p = reader.GetString("p");
+                        p = reader.GetString("p");
 
                         byte[] imgData = null;
-                        if (!reader.IsDBNull(reader.GetOrdinal("img")))
-                            imgData = (byte[])reader["img"];
-                        //byte[] img = (byte[])reader["img"];
-                        //pictureBox = new PictureBox();
-                        //using (var stream = new System.IO.MemoryStream(img))
-                        //{
-                        //    pictureBox.Image = System.Drawing.Image.FromStream(stream);
+                        imgData = (byte[])reader["img"];
+                        if (imgData != null)
+                        {
+                            Bitmap bitmap;
+                            using (MemoryStream memoryStream = new MemoryStream(imgData))
+                            {
+                                bitmap = new Bitmap(memoryStream);
 
-                        //}
+                            }
+                            bitmapData= bitmap;
+                        }
+                        else
+                        {
+                            bitmapData = null;
+                        }
+                        H1 = h1;
+                        P = p;
                     }
+
                     reader.Close();
                 }
-
-                MessageBox.Show("Дані взято з c_sharp_info");
-                command.Parameters.Clear();
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
-                MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
-
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+                }
             }
         }
-    }
 
+
+        public string GetH1()
+        {
+            return H1;
+        }
+        public string GetP()
+        {
+            return P;
+        }
+        public Bitmap GetImgData()
+        {
+            return bitmapData;
+        }
+    }
 }

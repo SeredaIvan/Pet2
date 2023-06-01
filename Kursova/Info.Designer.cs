@@ -32,16 +32,11 @@
             flowLayoutPanelAside = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
             flowLayoutPanelInfo = new FlowLayoutPanel();
-            labelH1 = new Label();
-            labelP = new Label();
-            pictureBox = new PictureBox();
             panel1 = new Panel();
             buttonPreviev = new Button();
             buttonNext = new Button();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
-            flowLayoutPanelInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,47 +72,11 @@
             // flowLayoutPanelInfo
             // 
             flowLayoutPanelInfo.BackColor = Color.DarkGray;
-            flowLayoutPanelInfo.Controls.Add(labelH1);
-            flowLayoutPanelInfo.Controls.Add(labelP);
-            flowLayoutPanelInfo.Controls.Add(pictureBox);
             flowLayoutPanelInfo.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanelInfo.Location = new Point(3, 3);
             flowLayoutPanelInfo.Name = "flowLayoutPanelInfo";
             flowLayoutPanelInfo.Size = new Size(1628, 857);
             flowLayoutPanelInfo.TabIndex = 0;
-            // 
-            // labelH1
-            // 
-            labelH1.AutoSize = true;
-            labelH1.BackColor = Color.Silver;
-            labelH1.Location = new Point(50, 50);
-            labelH1.Margin = new Padding(50);
-            labelH1.Name = "labelH1";
-            labelH1.Size = new Size(40, 20);
-            labelH1.TabIndex = 0;
-            labelH1.Text = "refer";
-            // 
-            // labelP
-            // 
-            labelP.AutoSize = true;
-            labelP.BackColor = Color.Silver;
-            labelP.Location = new Point(50, 170);
-            labelP.Margin = new Padding(50);
-            labelP.Name = "labelP";
-            labelP.Size = new Size(37, 20);
-            labelP.TabIndex = 1;
-            labelP.Text = "ewd";
-            // 
-            // pictureBox
-            // 
-            pictureBox.Location = new Point(50, 290);
-            pictureBox.Margin = new Padding(50);
-            pictureBox.MaximumSize = new Size(600, 400);
-            pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(125, 125);
-            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox.TabIndex = 2;
-            pictureBox.TabStop = false;
             // 
             // panel1
             // 
@@ -164,9 +123,6 @@
             Load += Info_Load;
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
-            flowLayoutPanelInfo.ResumeLayout(false);
-            flowLayoutPanelInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -180,8 +136,5 @@
         private Panel panel1;
         private Button buttonNext;
         private Button buttonPreviev;
-        private Label labelH1;
-        private Label labelP;
-        private PictureBox pictureBox;
     }
 }

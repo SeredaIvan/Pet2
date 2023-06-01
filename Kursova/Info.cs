@@ -17,10 +17,10 @@ namespace Kursova
     public partial class Info : Form
     {
         private MySqlCommand command;
-        int[] arrSubdivisions = null;
+        int[] numbers = null;
         string[] lines;
         int numberPage = 1;
-        PageInInfoForm[] pages = null;
+        PageInInfoForm[] pagesInSection = null;
         public Info()
         {
             InitializeComponent();
@@ -48,112 +48,227 @@ namespace Kursova
                 toolTip.SetToolTip(label, lines[i]);
             }
         }
-        private void FillMainArr(out PageInInfoForm[] pages)
+        private void FillWithInformation(int[] numbers, PageInInfoForm[] pagesInSection)
         {
-            
-            pages = new PageInInfoForm[arrSubdivisions.Length]; // Ініціалізація масиву
-
-            for (int i = 0; i <= arrSubdivisions.Length; i++)//заповнення масиву
+            for (int i = 0; i < pagesInSection.Length; i++)
             {
-                DataCollectionFromDB dataCollectionFromDB = new DataCollectionFromDB(command, arrSubdivisions[i]);//звернення до класу який бере потрібні дані
-                if (dataCollectionFromDB.H1 != null && dataCollectionFromDB.P != null)//&& dataCollectionFromDB.pictureBox.Image != null)
+                DataCollectionFromDB infoPageInSection = new DataCollectionFromDB(command, numbers[i]);
+                PageInInfoForm check = new PageInInfoForm();
+                if (infoPageInSection.GetH1() != null & infoPageInSection.GetP() != null & infoPageInSection.GetImgData() != null)
                 {
-                    pages[i] = new PageInInfoForm(dataCollectionFromDB.H1, dataCollectionFromDB.P);//, dataCollectionFromDB.pictureBox);
-                    MessageBox.Show("Створений елемент масиву ");
+
+                    pagesInSection[i] = new PageInInfoForm(infoPageInSection.GetH1(), infoPageInSection.GetP(), infoPageInSection.GetImgData());
+                    if (pagesInSection[i] == check)
+                    {
+                        MessageBox.Show("Об'єкт масиву не створено pagesInSection[i]==check-> FillWithInformation()");
+                    }
+                }
+                else if (infoPageInSection.GetH1() == null & infoPageInSection.GetP() != null & infoPageInSection.GetImgData() != null)
+                {
+
+                    pagesInSection[i] = new PageInInfoForm(infoPageInSection.GetP(), infoPageInSection.GetImgData());
+                    if (pagesInSection[i] == check)
+                    {
+                        MessageBox.Show("Об'єкт масиву не створено pagesInSection[i]==check-> FillWithInformation()");
+                    }
+                }
+                if (infoPageInSection.GetH1() != null & infoPageInSection.GetP() != null & infoPageInSection.GetImgData() == null)
+                {
+                    pagesInSection[i] = new PageInInfoForm(infoPageInSection.GetH1(), infoPageInSection.GetP());
+                    if (pagesInSection[i] == check)
+                    {
+                        MessageBox.Show("Об'єкт масиву не створено pagesInSection[i]==check-> FillWithInformation()");
+                    }
+                }
+                else MessageBox.Show("Об'єкт масиву не створено FillWithInformation()");
+            }
+        }
+        private void CheckLabel(string labelText, ref int[] numbers)
+        {
+            string subdivisions = "";
+            string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+
+                    // Запит до бази даних для перевірки значення label.Text
+                    command.CommandText = "SELECT subdivisions FROM c_sharp_headers WHERE h1 = @h1";
+                    command.Parameters.AddWithValue("@h1", labelText);
+
+                    object subdivisionsValue = command.ExecuteScalar();
+
+                    if (subdivisionsValue != null)
+                    {
+                        subdivisions = subdivisionsValue.ToString();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не знайдено відповідного запису для значення " + labelText);
+                    }
 
                 }
-                else if ((dataCollectionFromDB.H1 == null || dataCollectionFromDB.H1 == "") && (dataCollectionFromDB.P != null || dataCollectionFromDB.P != ""))//&& dataCollectionFromDB.pictureBox.Image != null)
+                catch (MySqlException ex)
                 {
-                    pages[i] = new PageInInfoForm(dataCollectionFromDB.P);//, dataCollectionFromDB.pictureBox);
-                    MessageBox.Show("Створений елемент масиву ");
+                    MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+                }
 
-                }
-                else if (dataCollectionFromDB.H1 != null && dataCollectionFromDB.P != null) //&& dataCollectionFromDB.pictureBox.Image == null)
+                if (subdivisions != "")
                 {
-                    pages[i] = new PageInInfoForm(dataCollectionFromDB.H1, dataCollectionFromDB.P);
-                    MessageBox.Show("Створений елемент масиву ");
-                }
-                else if (dataCollectionFromDB.H1 == null && dataCollectionFromDB.P != null )//&& dataCollectionFromDB.pictureBox.Image == null)
-                {
-                    pages[i] = new PageInInfoForm(dataCollectionFromDB.P);
-                    MessageBox.Show("Створений елемент масиву ");
+                    string[] numberStrings = subdivisions.Split(','); // Розділення рядка по комах і отримання масиву рядків
+                    if (numbers == null)
+                    {
+
+                        numbers = new int[numberStrings.Length];
+                        MessageBox.Show("Масив numbers створився");// Створення масиву int для збереження чисел
+
+                    }
+                    else
+                    {
+                        int[] resizedArray = new int[numberStrings.Length];
+
+                        Array.Copy(numbers, resizedArray, Math.Min(numbers.Length, numberStrings.Length));
+
+                        numbers = resizedArray;
+                        MessageBox.Show("Масив numbers ресайзнувся");
+                    }
+
+                    for (int i = 0; i < numberStrings.Length; i++)
+                    {
+                        int number;
+                        if (int.TryParse(numberStrings[i], out number)) // Перетворення рядка в int
+                        {
+                            numbers[i] = number;
+                            // Збереження числа у масиві
+                            
+                        }
+                        else
+                        {
+                            // Обробка помилки, якщо рядок не може бути перетворений в int
+                            MessageBox.Show("Неправильний формат числа: " + numberStrings[i]);
+                            // Або можна використати виключення: throw new FormatException("Неправильний формат числа: " + numberStrings[i]);
+                        }
+                    }
+                    MessageBox.Show("Масив numbers заповнився");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Екземпляр PageInInfoForm не вдалося створити");
+
+                    MessageBox.Show("Не вдається створити сторінку CheckLabel()");
+                    return;
                 }
-                
             }
-            MessageBox.Show("Заповнено інформацією масив сторінок");
         }
 
         private void Label_Click(object sender, EventArgs e)
         {
+            PageInInfoForm[] pagesInSection = null;
 
             Label clickedLabel = (Label)sender;
 
             string labelText = clickedLabel.Text;
+            string labelName = clickedLabel.Name;
 
-            if (CheckLabel(labelText, out arrSubdivisions))//заповнюємо масив з індексами і повернено значення trueабо fasle порівнюючи масив з null
+            CheckLabel(labelText, ref numbers);
+            if (numbers != null)
             {
-                
-                FillMainArr(out pages);
-                
+                pagesInSection = new PageInInfoForm[numbers.Length];
+                FillWithInformation(numbers, pagesInSection);
+
             }
             else
             {
-                MessageBox.Show("Масив arrSubdivisions не ініціализовано");
+                MessageBox.Show("Не вдається створити масив об'єктів PageInInfoForm->  Label_Click");
+
+            }
+            if (pagesInSection != null)
+            {
+                PrintLabelsAndImg();
+            }
+            else
+            {
+                MessageBox.Show("Не вдається створити сторінку PageInInfoForm [] pagesInSection=null;-> Label_Click");
+            }
+        }
+        private void PrintLabelsAndImg()
+        {
+            if (pagesInSection[numberPage].labelH1!=null)
+            {
+                Label labelH1 = new Label();
+                labelH1.Margin = new Padding(20);
+                labelH1.Text = pagesInSection[numberPage].labelH1.Text;
+            }
+
+            if (pagesInSection[numberPage].labelP != null)
+            {
+                Label labelP = new Label();
+                labelP.Margin = new Padding(20);
+                labelP.Text = pagesInSection[numberPage].labelP.Text;
+                labelP.Font = new Font(labelP.Font.FontFamily, 14);
+            }
+            if (pagesInSection[numberPage].pictureBox != null)
+            {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = pagesInSection[numberPage].pictureBox.Image;
+                pictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+                pictureBox.MaximumSize = new Size(600, 400);
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
         private void PrintInfo(ref int[] arrSubdivisions)
         {
-            if (arrSubdivisions == null)
-            {
-                MessageBox.Show("Subvision null");
-            }
-            else if (arrSubdivisions != null)
-            {
-                if (numberPage>0&&numberPage-1<=arrSubdivisions.Length)
-                {
-                    if (pages[numberPage-1].labelH1.Text != null& pages[numberPage - 1].labelH1.Text != "")
-                    {
-                        labelH1.Text = pages[numberPage - 1].labelH1.Text;
-                    }
-                    else
-                    {
-                        //Label labelH1_2 = labelH1;
-                        //flowLayoutPanelInfo.Controls.Remove(labelH1);
-                        //flowLayoutPanelInfo.Controls.Add(labelH1_2);
+            //if (arrSubdivisions == null)
+            //{
+            //    MessageBox.Show("Subvision null");
+            //}
+            //else if (arrSubdivisions != null)
+            //{
+            //    if (numberPage > 0 && numberPage - 1 <= arrSubdivisions.Length)
+            //    {
+            //        if (pages[numberPage - 1].labelH1.Text != null & pages[numberPage - 1].labelH1.Text != "")
+            //        {
+            //            labelH1.Text = pages[numberPage - 1].labelH1.Text;
+            //        }
+            //        else
+            //        {
+            //            //Label labelH1_2 = labelH1;
+            //            //flowLayoutPanelInfo.Controls.Remove(labelH1);
+            //            //flowLayoutPanelInfo.Controls.Add(labelH1_2);
 
-                        ////навпаки 
-                        //Label labelH1_1 = labelH1_2;
-                        //flowLayoutPanelInfo.Controls.Remove(labelH1_2);
-                        //flowLayoutPanelInfo.Controls.SetChildIndex(labelH1_1, 0);
+            //            ////навпаки 
+            //            //Label labelH1_1 = labelH1_2;
+            //            //flowLayoutPanelInfo.Controls.Remove(labelH1_2);
+            //            //flowLayoutPanelInfo.Controls.SetChildIndex(labelH1_1, 0);
 
-                        //labelH1.Hide();
+            //            //labelH1.Hide();
 
 
-                    }
-                    if (pages[numberPage - 1].labelP != null && pages[numberPage - 1].labelP.Text != "")
-                    {
-                        labelP.Text = pages[numberPage - 1].labelP.Text;
-                    }
+            //        }
+            //        if (pages[numberPage - 1].labelP != null && pages[numberPage - 1].labelP.Text != "")
+            //        {
+            //            labelP.Text = pages[numberPage - 1].labelP.Text;
+            //        }
 
-                    else
-                    {
-                    }
-                    //}
-                    //if (pages[numberPage-1].pictureBox.Image != null)
-                    //{
-                    //    pictureBox.Image = pages[numberPage - 1].pictureBox.Image;
-                    //}
-                    //else
-                    //{
+            //        else
+            //        {
+            //        }
+            //        //}
+            //        //if (pages[numberPage-1].pictureBox.Image != null)
+            //        //{
+            //        //    pictureBox.Image = pages[numberPage - 1].pictureBox.Image;
+            //        //}
+            //        //else
+            //        //{
 
-                    //}
-                }
-            }
+            //        //}
+            //    }
+            //}
             //if (arrSubdivisions == null)
             //{
             //    MessageBox.Show("Subvision null");
@@ -211,68 +326,68 @@ namespace Kursova
             //}
         }
 
-        private bool CheckLabel(string labelText, out int[] arrSubdivisions)
-        {
-            arrSubdivisions = null;
-            string subvisior = "";
-            string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-                    MySqlCommand command = connection.CreateCommand();
+        //private bool CheckLabel(string labelText, ref int[] arrSubdivisions)
+        //{
+        //    arrSubdivisions = null;
+        //    string subvisior = "";
+        //    string connectionString = "server=localhost;port=3306;username=root;password=root;database=kursovadb";
+        //    using (MySqlConnection connection = new MySqlConnection(connectionString))
+        //    {
+        //        try
+        //        {
+        //            connection.Open();
+        //            MySqlCommand command = connection.CreateCommand();
 
-                    // Запит до бази даних для перевірки значення label.Text
-                    command.CommandText = "SELECT subdivisions FROM c_sharp_headers WHERE h1 = @h1";
-                    command.Parameters.AddWithValue("@h1", labelText);
+        //            // Запит до бази даних для перевірки значення label.Text
+        //            command.CommandText = "SELECT subdivisions FROM c_sharp_headers WHERE h1 = @h1";
+        //            command.Parameters.AddWithValue("@h1", labelText);
 
-                    object subdivisionsValue = command.ExecuteScalar();
+        //            object subdivisionsValue = command.ExecuteScalar();
 
-                    if (subdivisionsValue != null)
-                    {
-                        subvisior = subdivisionsValue.ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не знайдено відповідного запису для значення " + labelText);
-                        return false;
-                    }
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
-                    return false;
-                }
+        //            if (subdivisionsValue != null)
+        //            {
+        //                subvisior = subdivisionsValue.ToString();
+        //            }
+        //            else
+        //            {
+        //                MessageBox.Show("Не знайдено відповідного запису для значення " + labelText);
+        //                return false;
+        //            }
+        //        }
+        //        catch (MySqlException ex)
+        //        {
+        //            MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+        //            return false;
+        //        }
 
-                if (!string.IsNullOrEmpty(subvisior))
-                {
-                    string[] numberStrings = subvisior.Split(','); // Розділення рядка по комах і отримання масиву рядків
-                    arrSubdivisions = new int[numberStrings.Length]; // Створення масиву int для збереження чисел
+        //        if (!string.IsNullOrEmpty(subvisior))
+        //        {
+        //            string[] numberStrings = subvisior.Split(','); // Розділення рядка по комах і отримання масиву рядків
+        //            arrSubdivisions = new int[numberStrings.Length]; // Створення масиву int для збереження чисел
 
-                    for (int i = 0; i < numberStrings.Length; i++)
-                    {
-                        if (int.TryParse(numberStrings[i], out int number)) // Перетворення рядка в int
-                        {
-                            arrSubdivisions[i] = number; // Збереження числа у масиві
-                        }
-                        else
-                        {
-                            // Обробка помилки, якщо рядок не може бути перетворений в int
-                            MessageBox.Show("Неправильний формат числа: " + numberStrings[i]);
-                            return false;
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Не вдається створити сторінку CheckLabel");
-                    return false;
-                }
-            }
+        //            for (int i = 0; i < numberStrings.Length; i++)
+        //            {
+        //                if (int.TryParse(numberStrings[i], out int number)) // Перетворення рядка в int
+        //                {
+        //                    arrSubdivisions[i] = number; // Збереження числа у масиві
+        //                }
+        //                else
+        //                {
+        //                    // Обробка помилки, якщо рядок не може бути перетворений в int
+        //                    MessageBox.Show("Неправильний формат числа: " + numberStrings[i]);
+        //                    return false;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Не вдається створити сторінку CheckLabel");
+        //            return false;
+        //        }
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
         private void Info_Load(object sender, EventArgs e)
         {
             CreateTextBoxes();
@@ -316,7 +431,7 @@ namespace Kursova
 
         private void buttonNext_Click_1(object sender, EventArgs e)
         {
-            if (numberPage - 1 < pages.Length & numberPage > 0)
+            if (numberPage - 1 < pagesInSection.Length & numberPage > 0)
             {
                 numberPage++;
             }
