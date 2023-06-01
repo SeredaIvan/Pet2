@@ -57,6 +57,8 @@ public class DataCollectionFromDB
             catch (MySqlException ex)
             {
                 MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+                MessageBox.Show("Помилка при з'єднанні з базою даних: " + ex.Message);
+
             }
         }
     }
