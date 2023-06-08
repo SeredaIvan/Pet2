@@ -75,7 +75,7 @@ namespace Kursova
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonPreviev_Click(object sender, EventArgs e)
         {
             if (numberPage > 0)
             {
@@ -88,7 +88,7 @@ namespace Kursova
         }
 
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonNext_Click(object sender, EventArgs e)
         {
             if (numberPage < DBLength & numberPage > 0)
             {
