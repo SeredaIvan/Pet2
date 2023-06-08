@@ -4,13 +4,16 @@
     <Compile Update="Authorization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Info.cs">
+    <Compile Update="Main_Menu_Panel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MainMenu.cs">
+    <Compile Update="Page_Info.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="User_Panel.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

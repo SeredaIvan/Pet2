@@ -37,6 +37,12 @@
             textBoxLogin = new TextBox();
             panel2 = new Panel();
             label_Auth = new Label();
+            panel15 = new Panel();
+            panel16 = new Panel();
+            panel17 = new Panel();
+            panel3 = new Panel();
+            panel4 = new Panel();
+            panel5 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -45,6 +51,7 @@
             // 
             panel1.Anchor = AnchorStyles.None;
             panel1.BackColor = SystemColors.ActiveCaptionText;
+            panel1.Controls.Add(panel15);
             panel1.Controls.Add(buttonReestr);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
@@ -152,12 +159,72 @@
             label_Auth.TabIndex = 0;
             label_Auth.Text = "Авторизація";
             // 
+            // panel15
+            // 
+            panel15.BackColor = Color.DimGray;
+            panel15.Location = new Point(358, 74);
+            panel15.Margin = new Padding(20, 3, 20, 3);
+            panel15.Name = "panel15";
+            panel15.Size = new Size(558, 13);
+            panel15.TabIndex = 14;
+            // 
+            // panel16
+            // 
+            panel16.BackColor = Color.DimGray;
+            panel16.Location = new Point(500, 132);
+            panel16.Margin = new Padding(20, 3, 20, 3);
+            panel16.Name = "panel16";
+            panel16.Size = new Size(160, 13);
+            panel16.TabIndex = 12;
+            // 
+            // panel17
+            // 
+            panel17.BackColor = Color.DimGray;
+            panel17.Location = new Point(541, 112);
+            panel17.Margin = new Padding(20, 3, 20, 3);
+            panel17.Name = "panel17";
+            panel17.Size = new Size(172, 13);
+            panel17.TabIndex = 13;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.DimGray;
+            panel3.Location = new Point(126, 320);
+            panel3.Margin = new Padding(20, 3, 20, 3);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(137, 13);
+            panel3.TabIndex = 17;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.DimGray;
+            panel4.Location = new Point(99, 300);
+            panel4.Margin = new Padding(20, 3, 20, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(137, 13);
+            panel4.TabIndex = 15;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.DimGray;
+            panel5.Location = new Point(174, 280);
+            panel5.Margin = new Padding(20, 3, 20, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(137, 13);
+            panel5.TabIndex = 16;
+            // 
             // Authorization
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkGray;
             ClientSize = new Size(802, 433);
+            Controls.Add(panel3);
+            Controls.Add(panel17);
+            Controls.Add(panel16);
             Controls.Add(panel1);
+            Controls.Add(panel4);
+            Controls.Add(panel5);
             Name = "Authorization";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Authorization";
@@ -181,5 +248,11 @@
         private Button buttonLogin;
         private TextBox textBoxPassword;
         private TextBox textBoxLogin;
+        private Panel panel15;
+        private Panel panel16;
+        private Panel panel17;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panel5;
     }
 }

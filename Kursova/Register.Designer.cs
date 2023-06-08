@@ -41,6 +41,12 @@
             label_Auth = new Label();
             panel3 = new Panel();
             pictureBoxBackButton = new PictureBox();
+            panel15 = new Panel();
+            panel16 = new Panel();
+            panel17 = new Panel();
+            panel4 = new Panel();
+            panel5 = new Panel();
+            panel6 = new Panel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -176,26 +182,87 @@
             panel3.Controls.Add(pictureBoxBackButton);
             panel3.Location = new Point(0, 0);
             panel3.Name = "panel3";
-            panel3.Size = new Size(50, 50);
+            panel3.Size = new Size(64, 64);
             panel3.TabIndex = 1;
             // 
             // pictureBoxBackButton
             // 
             pictureBoxBackButton.Cursor = Cursors.Hand;
-            pictureBoxBackButton.Image = Properties.Resources.icon_back_button1;
+            pictureBoxBackButton.Image = ProgTech.Properties.Resources.icon_back_button1;
             pictureBoxBackButton.Location = new Point(0, 0);
             pictureBoxBackButton.Name = "pictureBoxBackButton";
-            pictureBoxBackButton.Size = new Size(50, 50);
+            pictureBoxBackButton.Size = new Size(64, 64);
             pictureBoxBackButton.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxBackButton.TabIndex = 0;
             pictureBoxBackButton.TabStop = false;
             pictureBoxBackButton.Click += pictureBoxBackButton_Click;
             // 
+            // panel15
+            // 
+            panel15.BackColor = Color.DimGray;
+            panel15.Location = new Point(705, 76);
+            panel15.Margin = new Padding(20, 3, 20, 3);
+            panel15.Name = "panel15";
+            panel15.Size = new Size(580, 14);
+            panel15.TabIndex = 17;
+            // 
+            // panel16
+            // 
+            panel16.BackColor = Color.DimGray;
+            panel16.Location = new Point(678, 56);
+            panel16.Margin = new Padding(20, 3, 20, 3);
+            panel16.Name = "panel16";
+            panel16.Size = new Size(580, 14);
+            panel16.TabIndex = 15;
+            // 
+            // panel17
+            // 
+            panel17.BackColor = Color.DimGray;
+            panel17.Location = new Point(753, 36);
+            panel17.Margin = new Padding(20, 3, 20, 3);
+            panel17.Name = "panel17";
+            panel17.Size = new Size(580, 14);
+            panel17.TabIndex = 16;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.DimGray;
+            panel4.Location = new Point(-48, 353);
+            panel4.Margin = new Padding(20, 3, 20, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(152, 16);
+            panel4.TabIndex = 20;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.DimGray;
+            panel5.Location = new Point(-75, 333);
+            panel5.Margin = new Padding(20, 3, 20, 3);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(152, 16);
+            panel5.TabIndex = 18;
+            // 
+            // panel6
+            // 
+            panel6.BackColor = Color.DimGray;
+            panel6.Location = new Point(0, 313);
+            panel6.Margin = new Padding(20, 3, 20, 3);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(152, 16);
+            panel6.TabIndex = 19;
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkGray;
             ClientSize = new Size(802, 433);
+            Controls.Add(panel4);
+            Controls.Add(panel15);
+            Controls.Add(panel5);
+            Controls.Add(panel16);
+            Controls.Add(panel6);
+            Controls.Add(panel17);
             Controls.Add(panel3);
             Controls.Add(panel1);
             Name = "Register";
@@ -226,5 +293,11 @@
         private Label label3;
         private TextBox textBoxPassword;
         private TextBox textBoxPasswordCheck;
+        private Panel panel15;
+        private Panel panel16;
+        private Panel panel17;
+        private Panel panel4;
+        private Panel panel5;
+        private Panel panel6;
     }
 }

@@ -1,5 +1,7 @@
-namespace Kursova
-{
+using BackLibrary;
+using System.Net;
+
+namespace Kursova{
     internal static class Program
     {
         /// <summary>
@@ -13,10 +15,18 @@ namespace Kursova
             ApplicationConfiguration.Initialize();
             //Authorization authorization = new Authorization();
             //authorization.Show();
-            Info am= new Info();
-            Application.Run(am);
+            User user = new User();
+
+            Authorization page = new Authorization(user);
+            //MainMenu page = new MainMenu();
+
+            
+            Application.Run(page);
             Application.Exit();
-            //ProgTech
+
+            user.PushInfoUser();
+            MessageBox.Show($"{user.GetProgress() }Exit");
+
         }
     }
 }

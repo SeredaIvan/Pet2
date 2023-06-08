@@ -122,14 +122,6 @@ namespace Kursova
             {
                 form1.Close();
             }
- 
-
-            MainMenu form3 = Application.OpenForms.OfType<MainMenu>().FirstOrDefault();
-            if (form3 != null)
-            {
-                form3.Close();
-            }
-
             e.Cancel = false;
         }
     }

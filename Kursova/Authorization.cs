@@ -10,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using BackLibrary;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace Kursova
 {
     public partial class Authorization : Form
     {
+        public BackLibrary.User user { get; set; }
         public int IntParse(string str)
         {
             int result;
@@ -28,9 +31,18 @@ namespace Kursova
             return result;
 
         }
+
+
         public Authorization()
         {
             InitializeComponent();
+        }
+
+
+        public Authorization(BackLibrary.User user)
+        {
+            InitializeComponent();
+            this.user = user;
         }
 
         private void Authorization_Load(object sender, EventArgs e)
@@ -40,15 +52,7 @@ namespace Kursova
             textBoxPassword.PasswordChar = '●';
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         private void toggleButton_Click(object sender, EventArgs e)
         {
@@ -78,10 +82,12 @@ namespace Kursova
 
         }
 
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             string login = textBoxLogin.Text;
             string password = textBoxPassword.Text;
+
 
             DB db = new DB();
 
@@ -101,7 +107,13 @@ namespace Kursova
             {
                 MessageBox.Show("Авторизація пройшла успішно");
                 this.Hide();
-                MainMenu mainMenu = new MainMenu();
+                user.SetLogin(textBoxLogin.Text);
+                int success = Convert.ToInt32(table.Rows[0]["success"]);
+                int Id = Convert.ToInt32(table.Rows[0]["id"]);
+                user.SetId(Id);
+                user.SetProgress(success);
+
+                Main_Menu_Panel mainMenu = new Main_Menu_Panel(user);
                 mainMenu.Show();
             }
             else
@@ -113,18 +125,12 @@ namespace Kursova
 
         private void Authorization_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+
 
             Register form2 = Application.OpenForms.OfType<Register>().FirstOrDefault();
             if (form2 != null)
             {
                 form2.Close();
-            }
-
-            MainMenu form3 = Application.OpenForms.OfType<MainMenu>().FirstOrDefault();
-            if (form3 != null)
-            {
-                form3.Close();
             }
 
             e.Cancel = false;
