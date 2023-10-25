@@ -102,9 +102,9 @@ namespace Kursova
 
             adapter.SelectCommand = command;
             adapter.Fill(table);
-
             if (table.Rows.Count > 0)
             {
+                user = new BackLibrary.User();
                 MessageBox.Show("Авторизація пройшла успішно");
                 this.Hide();
                 user.SetLogin(textBoxLogin.Text);
@@ -121,6 +121,7 @@ namespace Kursova
                 MessageBox.Show("Не вдалося авторизуватись!");
                 return;
             }
+            
         }
 
         private void Authorization_FormClosing(object sender, FormClosingEventArgs e)

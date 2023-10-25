@@ -124,5 +124,10 @@ namespace Kursova
             }
             e.Cancel = false;
         }
+
+        private void label_Auth_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

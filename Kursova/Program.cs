@@ -1,5 +1,7 @@
 using BackLibrary;
+using System;
 using System.Net;
+using System.Windows.Forms;
 
 namespace Kursova{
     internal static class Program
@@ -10,16 +12,12 @@ namespace Kursova{
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            //Authorization authorization = new Authorization();
-            //authorization.Show();
+            
             User user = new User();
 
             Authorization page = new Authorization(user);
-            //MainMenu page = new MainMenu();
-
+           
             
             Application.Run(page);
             Application.Exit();

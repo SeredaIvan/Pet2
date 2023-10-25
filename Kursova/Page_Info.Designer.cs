@@ -1,4 +1,8 @@
-﻿namespace Kursova
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Kursova
 {
     partial class Page_Info
     {
@@ -149,13 +153,43 @@
             StartPosition = FormStartPosition.Manual;
             Text = "s";
             FormClosing += Page_Info_FormClosing;
-            Load += Page_Info_Load;
+            Load += Page_Info_Loadd;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxNight).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDay).EndInit();
             ResumeLayout(false);
+        }
+
+        private void Page_Info_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PictureBox2_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PictureBox3_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonPreviev_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ButtonNext_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

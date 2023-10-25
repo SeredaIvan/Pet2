@@ -1,4 +1,7 @@
-﻿namespace Kursova
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Kursova
 {
     partial class User_Panel
     {
@@ -281,6 +284,7 @@
             Controls.Add(label3);
             Controls.Add(progressBar1);
             Controls.Add(panel11);
+            MaximumSize = new Size(818, 497);
             Name = "User_Panel";
             Text = "User_Panel";
             FormClosing += User_Panel_FormClosing;

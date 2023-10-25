@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using BackLibrary;
 using MySqlX.XDevAPI.Common;
+using System.Drawing;
+using System;
+using System.Linq;
 
 namespace Kursova
 {
@@ -102,7 +105,7 @@ namespace Kursova
         }
 
 
-        private void Page_Info_Load(object sender, EventArgs e)
+        private void Page_Info_Loadd(object sender, EventArgs e)
         {
             Load_Lenght_DB();
             numberPage = (user.GetProgress() * DBLength) / 100;

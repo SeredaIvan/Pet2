@@ -1,4 +1,8 @@
-﻿namespace TextPusher
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace TextPusher
 {
     partial class Form1
     {
@@ -241,6 +245,8 @@
             ResumeLayout(false);
             PerformLayout();
         }
+
+       
 
         #endregion
 

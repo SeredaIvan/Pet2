@@ -1,4 +1,7 @@
-﻿namespace Kursova
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Kursova
 {
     partial class Register
 
@@ -172,9 +175,10 @@
             label_Auth.Location = new Point(95, 10);
             label_Auth.Margin = new Padding(95, 0, 5, 0);
             label_Auth.Name = "label_Auth";
-            label_Auth.Size = new Size(190, 46);
+            label_Auth.Size = new Size(185, 46);
             label_Auth.TabIndex = 0;
-            label_Auth.Text = "Регістрація";
+            label_Auth.Text = "Реєстрація";
+            label_Auth.Click += label_Auth_Click;
             // 
             // panel3
             // 

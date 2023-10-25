@@ -1,4 +1,7 @@
-﻿namespace Kursova
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace Kursova
 {
     partial class Main_Menu_Panel
     {
